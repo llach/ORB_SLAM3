@@ -8,6 +8,9 @@ buildRelDebug/*
 # Unignore all dirs
 !*/
 
+data/*
+.DS_STORE
+
 CMakeLists.txt.user
 CMakeLists_modified.txt
 

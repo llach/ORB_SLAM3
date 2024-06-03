@@ -40,16 +40,18 @@ bool LoadTelemetry(const string &strImuPath,
                    vector<cv::Point3f> &vGyro);
 
 int main(int argc, char **argv) {
-  if (argc != 5) {
-    cerr << endl
-         << "Usage: ./mono_inertial_gopro_vi path_to_vocabulary path_to_settings path_to_video path_to_telemetry"
-         << endl;
-    return 1;
-  }
-
+//   if (argc != 5) {
+//     cerr << endl
+//          << "Usage: ./mono_inertial_gopro_vi path_to_vocabulary path_to_settings path_to_video path_to_telemetry"
+//          << endl;
+//     return 1;
+//   }
+   
   vector<double> imuTimestamps;
   vector<cv::Point3f> vAcc, vGyr;
-  LoadTelemetry(argv[4], imuTimestamps, vAcc, vGyr);
+  LoadTelemetry("/home/slam/ORB3_SLAM/data/imu.json", imuTimestamps, vAcc, vGyr);
+  
+  return 0;
 
   // open settings to get image resolution
   cv::FileStorage fsSettings(argv[2], cv::FileStorage::READ);
@@ -177,6 +179,8 @@ bool LoadTelemetry(const string &path_to_telemetry_file,
     }
     json j;
     file >> j;
+
+    return true;
     const auto accl = j["1"]["streams"]["ACCL"]["samples"];
     const auto gyro = j["1"]["streams"]["GYRO"]["samples"];
     const auto gps5 = j["1"]["streams"]["GPS5"]["samples"];
